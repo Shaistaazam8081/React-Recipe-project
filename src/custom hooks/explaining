@@ -1,0 +1,7 @@
+it's not the topic of lec 67, it is about lec 68.
+
+Rules
+1. Always call Hooks at the top level
+2. Only call Hooks inside React functions
+3. Custom Hook names must start with use
+custom hoook can call another custom hook.

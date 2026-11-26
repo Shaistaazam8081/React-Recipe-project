@@ -3,18 +3,22 @@ import React, { useState } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import { useEffect } from 'react'
 import axios from 'axios'
+import useLoading from '../custom hooks/useLoading';
 
 
 function Home() {
 
   const [recipes, setRecipes] = useState([])
   const [total, setTotal] = useState(0)
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
 
+  const { loading, startLoading, stopLoading } = useLoading()
+
   async function fetchRecipes(skipCount, query) {
-    setLoading(true)
+    // setLoading(true)
+    startLoading()
     try {
       let url = `https://dummyjson.com/recipes?limit=6&skip=${skipCount}`
       if (query) {
@@ -28,7 +32,8 @@ function Home() {
     } catch (error) {
       setErrorMsg("please try again later")
     }
-    setLoading(false)
+    // setLoading(false)
+    stopLoading()
   }
   // jb kuch API me krna hota h to useEffect use krte h
   useEffect(() => {
@@ -116,9 +121,9 @@ export default Home;
 // spread data se prev rakha rhega,new data aayega , load krogi to
 //
 // {loading && <p className="text-center py-6 text-muted"> Loading.....</p>}
-      // {!loading && recipes.length === 0 && (
-      //   <p className="text-center py-6 text-muted"> {`No recipes found for '${searchQuery}'`}</p>
-      // )}  //jb  loading true hogi to ye nhi dikhega , false hogi to hi ye dikhega aur recipe 0 hogi.
+// {!loading && recipes.length === 0 && (
+//   <p className="text-center py-6 text-muted"> {`No recipes found for '${searchQuery}'`}</p>
+// )}  //jb  loading true hogi to ye nhi dikhega , false hogi to hi ye dikhega aur recipe 0 hogi.
 //
 
 
